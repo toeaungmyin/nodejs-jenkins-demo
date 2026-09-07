@@ -8,3 +8,14 @@ describe('GET /', () => {
     expect(res.body.status).toEqual('ok');
   });
 });
+
+describe('GET /health', () => {
+  it('should return status 200 with UP status, uptime, and timestamp', async () => {
+    const res = await request(app).get('/health');
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.status).toEqual('UP');
+    expect(res.body).toHaveProperty('uptime');
+    expect(res.body).toHaveProperty('timestamp');
+  });
+});
+
